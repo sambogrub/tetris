@@ -8,6 +8,7 @@ class Tetromino:
         self.fall_step = FALL_STEP
         self._index = 0
         self.shape = []
+        self.orientation = 0
 
     def __iter__(self):
         return self
@@ -65,6 +66,31 @@ class Line(Tetromino):
         fourth = pygame.Rect(xpos+(self.step*3), ypos, self.width, self.height)
         shape = [first, second, third, fourth]
         return shape
+    
+
+    def orientation_0(self):
+        self.shape[0] = self.shape[0].move(self.step * -2, self.step)
+        self.shape[1] = self.shape[1].move(-self.step, 0)
+        self.shape[2] = self.shape[2].move(0, -self.step)
+        self.shape[3] = self.shape[3].move(self.step, self.step * -2)
+
+    def orientation_1(self):
+        self.shape[0] = self.shape[0].move(self.step * 2, -self.step)
+        self.shape[1] = self.shape[1].move(self.step, 0)
+        self.shape[2] = self.shape[2].move(0, self.step)
+        self.shape[3] = self.shape[3].move(-self.step, self.step * 2)
+
+
+    def turn_right(self) -> list:
+        if self.orientation == 0:
+            self.orientation_1()
+            self.orientation = 1
+        elif self.orientation == 1:
+            self.orientation_0()
+            self.orientation = 0
+
+        
+
 
 # t shaped tetromino
 class T(Tetromino):
