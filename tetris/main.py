@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-from models import Square, Line
+from models import Square, Line, L, J, S, Z, T
 from config import RECT_WIDTH, RECT_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED
 
 pygame.init()
@@ -9,7 +9,7 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 
-player = Line(0, 0)
+player = T(0, 0)
 
 grid = []
 
