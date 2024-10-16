@@ -42,7 +42,6 @@ class Square(Tetromino):
         self.height = RECT_HEIGHT
         self.shape = self.build_shape(xpos, ypos)
         
-
     def build_shape(self, xpos, ypos) -> list:
         top_l = pygame.Rect(xpos, ypos, self.width, self.height)
         top_r = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
