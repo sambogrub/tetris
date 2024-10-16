@@ -1,5 +1,6 @@
 
-
+# clock variable
+FRAMERATE = 60
 
 # size variables
 RECT_WIDTH = 20
@@ -11,5 +12,5 @@ SCREEN_HEIGHT = RECT_HEIGHT * GRID_HEIGHT
 
 # movement variables
 SIDE_STEP = RECT_WIDTH # left right movement 
-SPEED = 40 # falling speed, how often it falls
+SPEED = 40 # falling speed, how many fps before it falls
 FALL_STEP = SIDE_STEP/2
