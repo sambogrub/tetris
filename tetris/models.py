@@ -50,6 +50,12 @@ class Square(Tetromino):
         bot_r = pygame.Rect(xpos +self.step, ypos+self.step, self.width, self.height)
         shape = [top_l,top_r,bot_l,bot_r]
         return shape
+    
+    def turn_right(self):
+        pass
+    
+    def turn_left(self):
+        pass
 
 # line shaped tetromino
 class Line(Tetromino):
@@ -89,6 +95,13 @@ class Line(Tetromino):
             self.orientation_0()
             self.orientation = 0
 
+    def turn_left(self) -> list:
+        if self.orientation == 0:
+            self.orientation_1()
+            self.orientation = 1
+        elif self.orientation == 1:
+            self.orientation_0()
+            self.orientation = 0
         
 
 
