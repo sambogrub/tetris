@@ -45,11 +45,11 @@ class Engine():
 
             # check if the piece needs to move down
             if num_frames == SPEED:
-                print('piece is moving')
                 piece.move_down()
                 num_frames = 0
             else:
                 num_frames += 1
+                
             self.ui.update_screen(self.screen_matrix, piece)
 
             for event in pygame.event.get():
