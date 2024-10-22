@@ -9,21 +9,33 @@ class Tetromino:
         self.step = SIDE_STEP
         self.fall_step = FALL_STEP
         self.coords = []
+        self.potential_coords = []
         self.color = (255,0,0)
         self.orientation = 0
 
-    #base move left function    
-    def move_left(self):
-        for coord in self.coords:
+    #setting the potential coordinates for moving left to find possible collisions  
+    def potential_left(self):
+        self.potential_coords = [coord[:] for coord in self.coords]
+        for coord in self.potential_coords:
             coord[1] -= self.step
-    # base move right function
-    def move_right(self):
-        for coord in self.coords:
-            coord[1] += self.step
+        
 
+    # setting the potential coordinates for moving right to find possible collisions
+    def potential_right(self):
+        self.potential_coords = [coord[:] for coord in self.coords]
+        for coord in self.potential_coords:
+            coord[1] += self.step
+        
+    # commit the potential coordinates to the actual coordinates
+    def commit_coordinates(self):
+        self.coords = [coord[:] for coord in self.potential_coords]
+
+    # move down function
     def move_down(self):
         for coord in self.coords:
             coord[0] += self.fall_step
+
+    
 
 # square shaped tetromino
 class Square(Tetromino):

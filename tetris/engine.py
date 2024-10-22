@@ -28,8 +28,14 @@ class Engine():
                     return True
         return False
 
-            
-
+    #check for collision when moving the piece
+    def check_movement_collision(self,piece):
+        for coord in piece.potential_coords:
+            grid_row = int(coord[0])
+            grid_col = int(coord[1])
+            if grid_col < 0 or grid_col > GRID_WIDTH - 1 or self.screen_matrix[grid_row][grid_col][0] is not None:
+                return True
+        return False
 
     # add a static piece to the matrix
     def add_piece_to_matrix(self,piece):
@@ -68,7 +74,7 @@ class Engine():
             #gets the keypress and passes it to the actions function
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    self.event_actions(event)
+                    self.event_actions(event, piece)
                 if event.type == pygame.QUIT:
                     run = False
 
@@ -106,10 +112,20 @@ class Engine():
                 return models.Square()
             
     # move or rotate piece as needed
-    def event_actions(self, event):
+    def event_actions(self, event, piece):
         key = event.key
         match key:
-            case pygame.K_d:
+            case pygame.K_d: #right movement of piece
+                piece.potential_right()
+                if self.check_movement_collision(piece) is False:
+                    piece.commit_coordinates()
+            case pygame.K_a: #left movement of piece
+                piece.potential_left()
+                if self.check_movement_collision(piece) is False:
+                    piece.commit_coordinates()
+            case pygame.K_s: #increased fall movement of piece
                 pass
-                
-
+            case pygame.K_RIGHT: #right turn of piece
+                pass
+            case pygame.K_LEFT: #left turn of piece
+                pass
