@@ -3,17 +3,20 @@ from config import RECT_HEIGHT, RECT_WIDTH, SIDE_STEP, FALL_STEP
 
 # base tetromino class
 class Tetromino:
+    """This is the parent Tetromino class containing all the basic movements for each piece.
+    Each individual piece will contain its own rotation functions"""
     def __init__(self):
         self.step = SIDE_STEP
         self.fall_step = FALL_STEP
         self.coords = []
         self.color = (255,0,0)
         self.orientation = 0
-        
+
+    #base move left function    
     def move_left(self):
         for coord in self.coords:
             coord[1] -= self.step
-
+    # base move right function
     def move_right(self):
         for coord in self.coords:
             coord[1] += self.step
@@ -63,16 +66,10 @@ class Line(Tetromino):
     
 
     def orientation_0(self):
-        self.shape[0] = self.shape[0].move(self.step * -2, self.step)
-        self.shape[1] = self.shape[1].move(-self.step, 0)
-        self.shape[2] = self.shape[2].move(0, -self.step)
-        self.shape[3] = self.shape[3].move(self.step, self.step * -2)
+        pass
 
     def orientation_1(self):
-        self.shape[0] = self.shape[0].move(self.step * 2, -self.step)
-        self.shape[1] = self.shape[1].move(self.step, 0)
-        self.shape[2] = self.shape[2].move(0, self.step)
-        self.shape[3] = self.shape[3].move(-self.step, self.step * 2)
+        pass
 
 
     def turn_right(self) -> list:
