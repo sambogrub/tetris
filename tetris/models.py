@@ -6,49 +6,38 @@ class Tetromino:
     def __init__(self):
         self.step = SIDE_STEP
         self.fall_step = FALL_STEP
-        self._index = 0
-        self.shape = []
+        self.coords = []
+        self.color = (255,0,0)
         self.orientation = 0
-
-    def __iter__(self):
-        return self
-    
-    def __next__(self):
-        if self._index < len(self.shape):
-            result = self.shape[self._index]
-            self._index += 1
-            return result
-        else:
-            self._index = 0
-            raise StopIteration
         
     def move_left(self):
-        for rect in self.shape:
-            rect.x -= self.step
+        for coord in self.coords:
+            coord[1] -= self.step
 
     def move_right(self):
-        for rect in self.shape:
-            rect.x += self.step
+        for coord in self.coords:
+            coord[1] += self.step
 
     def move_down(self):
-        for rect in self.shape:
-            rect.y += self.fall_step
+        for coord in self.coords:
+            coord[0] += self.fall_step
 
 # square shaped tetromino
 class Square(Tetromino):
-    def __init__(self,xpos,ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
-        
-    def build_shape(self, xpos, ypos) -> list:
-        top_l = pygame.Rect(xpos, ypos, self.width, self.height)
-        top_r = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        bot_l = pygame.Rect(xpos, ypos+self.step, self.width, self.height)
-        bot_r = pygame.Rect(xpos +self.step, ypos+self.step, self.width, self.height)
-        shape = [top_l,top_r,bot_l,bot_r]
-        return shape
+        self.coords = self.build_shape()
+
+    # retruns a list of lists -> [[row,col],[row,col],[row,col],[row,col]]    
+    def build_shape(self) -> list[list]:
+        top_l = [0.0,0.0]
+        top_r = [0.0,1.0]
+        bot_l = [1.0,0.0]
+        bot_r = [1.0,1.0]
+        coords = [top_l,top_r,bot_l,bot_r]
+        return coords
     
     def turn_right(self):
         pass
@@ -58,17 +47,17 @@ class Square(Tetromino):
 
 # line shaped tetromino
 class Line(Tetromino):
-    def __init__(self, xpos, ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
+        self.coords = self.build_shape()
 
-    def build_shape(self, xpos, ypos) -> list:
-        first = pygame.Rect(xpos, ypos, self.width, self.height)
-        second = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        third = pygame.Rect(xpos+(self.step*2), ypos, self.width, self.height)
-        fourth = pygame.Rect(xpos+(self.step*3), ypos, self.width, self.height)
+    def build_shape(self) -> list:
+        first = [0.0,0.0]
+        second = [0.0,1.0]
+        third = [0.0,2.0]
+        fourth = [0.0,3.0]
         shape = [first, second, third, fourth]
         return shape
     
@@ -106,80 +95,80 @@ class Line(Tetromino):
 
 # t shaped tetromino
 class T(Tetromino):
-    def __init__(self, xpos, ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
+        self.coords = self.build_shape()
 
-    def build_shape(self, xpos, ypos) -> list:
-        first = pygame.Rect(xpos, ypos, self.width, self.height)
-        second = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        third = pygame.Rect(xpos+(self.step*2), ypos, self.width, self.height)
-        fourth = pygame.Rect(xpos+self.step, ypos+self.step, self.width, self.height)
+    def build_shape(self) -> list:
+        first = [0.0,0.0]
+        second = [0.0,1.0]
+        third = [0.0,2.0]
+        fourth = [1.0,1.0]
         shape = [first, second, third, fourth]
         return shape
     
 # l shaped tetromino
 class L(Tetromino):
-    def __init__(self, xpos, ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
+        self.coords = self.build_shape()
 
-    def build_shape(self, xpos, ypos) -> list:
-        first = pygame.Rect(xpos, ypos, self.width, self.height)
-        second = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        third = pygame.Rect(xpos+(self.step*2), ypos, self.width, self.height)
-        fourth = pygame.Rect(xpos, ypos+self.step, self.width, self.height)
+    def build_shape(self) -> list:
+        first = [0.0,0.0]
+        second = [0.0,1.0]
+        third = [0.0,2.0]
+        fourth = [1.0,0.0]
         shape = [first, second, third, fourth]
         return shape
     
 # j shaped tetromino
 class J(Tetromino):
-    def __init__(self, xpos, ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
+        self.coords = self.build_shape()
 
-    def build_shape(self, xpos, ypos) -> list:
-        first = pygame.Rect(xpos, ypos, self.width, self.height)
-        second = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        third = pygame.Rect(xpos+(self.step*2), ypos, self.width, self.height)
-        fourth = pygame.Rect(xpos+(self.step*2), ypos+self.step, self.width, self.height)
+    def build_shape(self) -> list:
+        first = [0.0,0.0]
+        second = [0.0,1.0]
+        third = [0.0,2.0]
+        fourth = [1.0,2.0]
         shape = [first, second, third, fourth]
         return shape
     
 # s shaped tetromino
 class S(Tetromino):
-    def __init__(self, xpos, ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
+        self.coords = self.build_shape()
 
-    def build_shape(self, xpos, ypos) -> list:
-        first = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        second = pygame.Rect(xpos+(self.step*2), ypos, self.width, self.height)
-        third = pygame.Rect(xpos, ypos+self.step, self.width, self.height)
-        fourth = pygame.Rect(xpos+self.step, ypos+self.step, self.width, self.height)
+    def build_shape(self) -> list:
+        first = [0.0,1.0]
+        second = [0.0,2.0]
+        third = [1.0,0.0]
+        fourth = [1.0,1.0]
         shape = [first, second, third, fourth]
         return shape
     
 # z shaped tetromino
 class Z(Tetromino):
-    def __init__(self, xpos, ypos):
+    def __init__(self):
         super().__init__()
         self.width = RECT_WIDTH
         self.height = RECT_HEIGHT
-        self.shape = self.build_shape(xpos, ypos)
+        self.coords = self.build_shape()
 
-    def build_shape(self, xpos, ypos) -> list:
-        first = pygame.Rect(xpos, ypos, self.width, self.height)
-        second = pygame.Rect(xpos+self.step, ypos, self.width, self.height)
-        third = pygame.Rect(xpos+self.step, ypos+self.step, self.width, self.height)
-        fourth = pygame.Rect(xpos+(self.step*2), ypos+self.step, self.width, self.height)
+    def build_shape(self) -> list:
+        first = [0.0,0.0]
+        second = [0.0,1.0]
+        third = [1.0,1.0]
+        fourth = [1.0,2.0]
         shape = [first, second, third, fourth]
         return shape

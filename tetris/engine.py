@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 import random
 import models
-from config import GRID_WIDTH, GRID_HEIGHT, FRAMERATE, SPEED
+from config import GRID_WIDTH, GRID_HEIGHT, FRAMERATE, DROP_TIMING, SIDE_STEP
 
 class Engine():
     def __init__(self,ui):
@@ -12,12 +12,31 @@ class Engine():
     
     # build collision tracking matrix
     def build_matrix(self):
-        matrix = [[None for i in range(GRID_WIDTH)] for x in range(GRID_HEIGHT)]
+        matrix = [[[None,None] for i in range(GRID_WIDTH)] for x in range(GRID_HEIGHT)]
         return matrix
     
+    # check for collision
+    def check_fall_collision(self,piece):
+        
+        for coord in piece.coords:
+            grid_row = int(coord[0])
+            if coord[0] % SIDE_STEP == 0:
+                grid_col = int(coord[1])
+                if grid_row +1  == GRID_HEIGHT or self.screen_matrix[grid_row+1][grid_col][0]:
+
+                    return True
+        return False
+
+            
+
+
     # add a static piece to the matrix
-    def add_piece_to_matrix(self):
-        pass
+    def add_piece_to_matrix(self,piece):
+        for coord in piece.coords:
+            grid_row = int(coord[0])
+            grid_col = int(coord[1])
+            self.screen_matrix[grid_row][grid_col][0] = 1
+        return False
     
     # check if a row is completed in the matrix
     def check_row_completion(self):
@@ -30,50 +49,69 @@ class Engine():
     # main game loop
     def run(self):
         run = True
+        # piece = self.get_new_piece()
         piece = self.get_new_piece()
    
         moving_piece = True
         num_frames = 0
         while run:
             
+           
+
             # set the framerate first
             self.clock.tick(FRAMERATE)
 
             # check if a new piece is needed
             if moving_piece == False:
                 piece = self.get_new_piece()
-
-            # check if the piece needs to move down
-            if num_frames == SPEED:
-                piece.move_down()
-                num_frames = 0
-            else:
-                num_frames += 1
-                
-            self.ui.update_screen(self.screen_matrix, piece)
+                moving_piece = True
 
             for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    self.event_actions(event)
                 if event.type == pygame.QUIT:
                     run = False
+
+            # check if the piece needs to move down
+            if num_frames == DROP_TIMING:
+                if not self.check_fall_collision(piece):
+                    piece.move_down()
+                    num_frames = 0
+                else:
+                    # for rect in piece:
+                    #     print('collided', rect)
+                    if not self.add_piece_to_matrix(piece):
+                        moving_piece = False
+            else:
+                num_frames += 1
+
+            self.ui.update_screen(self.screen_matrix, piece)
+                
 
     # get random tetromino to use
     def get_new_piece(self):
         piece_num = random.randrange(1,8)
         match piece_num:
             case 1:
-                return models.Line(0,0)
+                return models.Line()
             case 2:
-                return models.T(0,0)
+                return models.T()
             case 3:
-                return models.L(0,0)
+                return models.L()
             case 4:
-                return models.J(0,0)
+                return models.J()
             case 5:
-                return models.S(0,0)
+                return models.S()
             case 6:
-                return models.Z(0,0)
+                return models.Z()
             case 7:
-                return models.Square(0,0)
+                return models.Square()
             
-    
+    # move or rotate piece as needed
+    def event_actions(self, event):
+        key = event.key
+        match key:
+            case pygame.K_d:
+                pass
+                
 
