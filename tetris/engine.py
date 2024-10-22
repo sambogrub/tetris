@@ -5,6 +5,8 @@ import models
 from config import GRID_WIDTH, GRID_HEIGHT, FRAMERATE, DROP_TIMING, SIDE_STEP
 
 class Engine():
+    """All basic calculations and services are performed here. This class contains the main game loop, controls the changing of the piece coordinates
+    and tracks the piece collisions."""
     def __init__(self,ui):
         self.screen_matrix = self.build_matrix()
         self.ui = ui
@@ -15,9 +17,8 @@ class Engine():
         matrix = [[[None,None] for i in range(GRID_WIDTH)] for x in range(GRID_HEIGHT)]
         return matrix
     
-    # check for collision
+    # check for collision while falling. It will predict where the piece will fall and check there before allowing it to be drawn
     def check_fall_collision(self,piece):
-        
         for coord in piece.coords:
             grid_row = int(coord[0])
             if coord[0] % SIDE_STEP == 0:
@@ -52,20 +53,19 @@ class Engine():
         # piece = self.get_new_piece()
         piece = self.get_new_piece()
    
-        moving_piece = True
-        num_frames = 0
+        moving_piece = True #indicates that a piece is falling. 
+        num_frames = 0 #initialize the number of frames, used in falling speed
         while run:
             
-           
-
             # set the framerate first
             self.clock.tick(FRAMERATE)
 
-            # check if a new piece is needed
+            # check if a new piece is needed using moving_piece
             if moving_piece == False:
                 piece = self.get_new_piece()
                 moving_piece = True
 
+            #gets the keypress and passes it to the actions function
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     self.event_actions(event)
@@ -78,14 +78,12 @@ class Engine():
                     piece.move_down()
                     num_frames = 0
                 else:
-                    # for rect in piece:
-                    #     print('collided', rect)
-                    if not self.add_piece_to_matrix(piece):
+                    if not self.add_piece_to_matrix(piece): #if a piece stops falling, it sets moving_piece to false to call a new piece
                         moving_piece = False
             else:
                 num_frames += 1
 
-            self.ui.update_screen(self.screen_matrix, piece)
+            self.ui.update_screen(self.screen_matrix, piece)# passing the matrix and piece to the ui to be drawn
                 
 
     # get random tetromino to use
