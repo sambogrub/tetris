@@ -1,6 +1,7 @@
 import pygame
 from config import RECT_HEIGHT, RECT_WIDTH, SIDE_STEP, FALL_STEP
 
+
 # base tetromino class
 class Tetromino:
     """This is the parent Tetromino class containing all the basic movements for each piece.
@@ -19,7 +20,6 @@ class Tetromino:
         for coord in self.potential_coords:
             coord[1] -= self.step
         
-
     # setting the potential coordinates for moving right to find possible collisions
     def potential_right(self):
         self.potential_coords = [coord[:] for coord in self.coords]
@@ -35,7 +35,6 @@ class Tetromino:
         for coord in self.coords:
             coord[0] += self.fall_step
 
-    
 
 # square shaped tetromino
 class Square(Tetromino):
@@ -76,13 +75,11 @@ class Line(Tetromino):
         shape = [first, second, third, fourth]
         return shape
     
-
     def orientation_0(self):
         pass
 
     def orientation_1(self):
         pass
-
 
     def turn_right(self) -> list:
         if self.orientation == 0:
@@ -101,7 +98,6 @@ class Line(Tetromino):
             self.orientation = 0
         
 
-
 # t shaped tetromino
 class T(Tetromino):
     def __init__(self):
@@ -118,6 +114,7 @@ class T(Tetromino):
         shape = [first, second, third, fourth]
         return shape
     
+
 # l shaped tetromino
 class L(Tetromino):
     def __init__(self):
@@ -134,6 +131,7 @@ class L(Tetromino):
         shape = [first, second, third, fourth]
         return shape
     
+
 # j shaped tetromino
 class J(Tetromino):
     def __init__(self):
@@ -150,6 +148,7 @@ class J(Tetromino):
         shape = [first, second, third, fourth]
         return shape
     
+
 # s shaped tetromino
 class S(Tetromino):
     def __init__(self):
@@ -166,6 +165,7 @@ class S(Tetromino):
         shape = [first, second, third, fourth]
         return shape
     
+
 # z shaped tetromino
 class Z(Tetromino):
     def __init__(self):

@@ -24,7 +24,6 @@ class Engine():
             if coord[0] % SIDE_STEP == 0:
                 grid_col = int(coord[1])
                 if grid_row +1  == GRID_HEIGHT or self.screen_matrix[grid_row+1][grid_col][0]:
-
                     return True
         return False
 
@@ -91,7 +90,6 @@ class Engine():
 
             self.ui.update_screen(self.screen_matrix, piece)# passing the matrix and piece to the ui to be drawn
                 
-
     # get random tetromino to use
     def get_new_piece(self):
         piece_num = random.randrange(1,8)
