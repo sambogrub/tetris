@@ -46,10 +46,10 @@ class Square(Tetromino):
 
     # retruns a list of lists -> [[row,col],[row,col],[row,col],[row,col]]    
     def build_shape(self) -> list[list]:
-        top_l = [0.0,0.0]
-        top_r = [0.0,1.0]
-        bot_l = [1.0,0.0]
-        bot_r = [1.0,1.0]
+        top_l = [0,0]
+        top_r = [0,1]
+        bot_l = [1,0]
+        bot_r = [1,1]
         coords = [top_l,top_r,bot_l,bot_r]
         return coords
     
@@ -68,10 +68,10 @@ class Line(Tetromino):
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0.0,0.0]
-        second = [0.0,1.0]
-        third = [0.0,2.0]
-        fourth = [0.0,3.0]
+        first = [0,0]
+        second = [0,1]
+        third = [0,2]
+        fourth = [0,3]
         shape = [first, second, third, fourth]
         return shape
     
@@ -107,10 +107,10 @@ class T(Tetromino):
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0.0,0.0]
-        second = [0.0,1.0]
-        third = [0.0,2.0]
-        fourth = [1.0,1.0]
+        first = [0,0]
+        second = [0,1]
+        third = [0,2]
+        fourth = [1,1]
         shape = [first, second, third, fourth]
         return shape
     
@@ -124,10 +124,10 @@ class L(Tetromino):
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0.0,0.0]
-        second = [0.0,1.0]
-        third = [0.0,2.0]
-        fourth = [1.0,0.0]
+        first = [0,0]
+        second = [0,1]
+        third = [0,2]
+        fourth = [1,0]
         shape = [first, second, third, fourth]
         return shape
     
@@ -141,10 +141,10 @@ class J(Tetromino):
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0.0,0.0]
-        second = [0.0,1.0]
-        third = [0.0,2.0]
-        fourth = [1.0,2.0]
+        first = [0,0]
+        second = [0,1]
+        third = [0,2]
+        fourth = [1,2]
         shape = [first, second, third, fourth]
         return shape
     
@@ -158,10 +158,10 @@ class S(Tetromino):
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0.0,1.0]
-        second = [0.0,2.0]
-        third = [1.0,0.0]
-        fourth = [1.0,1.0]
+        first = [0,1]
+        second = [0,2]
+        third = [1,0]
+        fourth = [1,1]
         shape = [first, second, third, fourth]
         return shape
     
@@ -175,9 +175,9 @@ class Z(Tetromino):
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0.0,0.0]
-        second = [0.0,1.0]
-        third = [1.0,1.0]
-        fourth = [1.0,2.0]
+        first = [0,0]
+        second = [0,1]
+        third = [1,1]
+        fourth = [1,2]
         shape = [first, second, third, fourth]
         return shape
