@@ -23,7 +23,7 @@ class UI():
             for col_num,cell in enumerate(row):
                 if cell[0] is not None:
                     rectangle = pygame.Rect(col_num*BOX_WIDTH,row_num*BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT)
-                    pygame.draw.rect(self.screen, (255,0,0), rectangle)
+                    pygame.draw.rect(self.screen, cell[1], rectangle)
                    
 
     # draw moving piece
@@ -31,4 +31,4 @@ class UI():
         
         for coord in piece.coords:
             rect = pygame.Rect(coord[1]*BOX_WIDTH/BOX_DIVISION, coord[0]* BOX_HEIGHT/BOX_DIVISION, BOX_WIDTH, BOX_HEIGHT)
-            pygame.draw.rect(self.screen, (255,0,0),rect)
+            pygame.draw.rect(self.screen, piece.color ,rect)

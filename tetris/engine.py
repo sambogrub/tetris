@@ -42,6 +42,7 @@ class Engine():
             grid_row = int(coord[0])
             grid_col = int(coord[1])
             self.screen_matrix[grid_row][grid_col][0] = 1
+            self.screen_matrix[grid_row][grid_col][1] = piece.color
         return False
     
     # check if a row is completed in the matrix

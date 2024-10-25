@@ -11,7 +11,7 @@ class Tetromino:
         self.fall_step = FALL_STEP
         self.coords = []
         self.potential_coords = []
-        self.color = (255,0,0)
+        self.color = (255,255,255)
         self.orientation = 0
 
     #setting the potential coordinates for moving left to find possible collisions  
@@ -43,6 +43,7 @@ class Square(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (255,0,0)
 
     # retruns a list of lists -> [[row,col],[row,col],[row,col],[row,col]]    
     def build_shape(self) -> list[list]:
@@ -66,6 +67,7 @@ class Line(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (0,0,255)
 
     def build_shape(self) -> list:
         first = [0*BOX_DIVISION,0*BOX_DIVISION]
@@ -105,6 +107,7 @@ class T(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (0,255,0)
 
     def build_shape(self) -> list:
         first = [0*BOX_DIVISION,0*BOX_DIVISION]
@@ -122,6 +125,7 @@ class L(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (255,255,0)
 
     def build_shape(self) -> list:
         first = [0*BOX_DIVISION,0*BOX_DIVISION]
@@ -139,6 +143,7 @@ class J(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (0,255,255)
 
     def build_shape(self) -> list:
         first = [0*BOX_DIVISION,0*BOX_DIVISION]
@@ -156,6 +161,7 @@ class S(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (255,0,255)
 
     def build_shape(self) -> list:
         first = [0*BOX_DIVISION,1*BOX_DIVISION]
@@ -173,6 +179,7 @@ class Z(Tetromino):
         self.width = BOX_WIDTH
         self.height = BOX_HEIGHT
         self.coords = self.build_shape()
+        self.color = (255,255,255)
 
     def build_shape(self) -> list:
         first = [0*BOX_DIVISION,0*BOX_DIVISION]
