@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from config import SCREEN_HEIGHT, SCREEN_WIDTH, SIDE_STEP,RECT_WIDTH,RECT_HEIGHT
+from config import SCREEN_HEIGHT, SCREEN_WIDTH, SIDE_STEP,BOX_WIDTH,BOX_HEIGHT,BOX_DIVISION
 
 class UI():
     def __init__(self):
@@ -22,7 +22,7 @@ class UI():
         for row_num,row in enumerate(matrix):
             for col_num,cell in enumerate(row):
                 if cell[0] is not None:
-                    rectangle = pygame.Rect(col_num*RECT_WIDTH,row_num*RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT)
+                    rectangle = pygame.Rect(col_num*BOX_WIDTH,row_num*BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT)
                     pygame.draw.rect(self.screen, (255,0,0), rectangle)
                    
 
@@ -30,5 +30,5 @@ class UI():
     def draw_current_piece(self,piece):
         
         for coord in piece.coords:
-            rect = pygame.Rect(coord[1]*RECT_WIDTH, coord[0]* RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT)
+            rect = pygame.Rect(coord[1]*BOX_WIDTH/BOX_DIVISION, coord[0]* BOX_HEIGHT/BOX_DIVISION, BOX_WIDTH, BOX_HEIGHT)
             pygame.draw.rect(self.screen, (255,0,0),rect)

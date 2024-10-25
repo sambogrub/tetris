@@ -1,5 +1,5 @@
 import pygame
-from config import RECT_HEIGHT, RECT_WIDTH, SIDE_STEP, FALL_STEP
+from config import BOX_HEIGHT, BOX_WIDTH, SIDE_STEP, FALL_STEP, BOX_DIVISION
 
 
 # base tetromino class
@@ -40,16 +40,16 @@ class Tetromino:
 class Square(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     # retruns a list of lists -> [[row,col],[row,col],[row,col],[row,col]]    
     def build_shape(self) -> list[list]:
-        top_l = [0,0]
-        top_r = [0,1]
-        bot_l = [1,0]
-        bot_r = [1,1]
+        top_l = [0*BOX_DIVISION,0*BOX_DIVISION]
+        top_r = [0*BOX_DIVISION,1*BOX_DIVISION]
+        bot_l = [1*BOX_DIVISION,0*BOX_DIVISION]
+        bot_r = [1*BOX_DIVISION,1*BOX_DIVISION]
         coords = [top_l,top_r,bot_l,bot_r]
         return coords
     
@@ -63,15 +63,15 @@ class Square(Tetromino):
 class Line(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0,0]
-        second = [0,1]
-        third = [0,2]
-        fourth = [0,3]
+        first = [0*BOX_DIVISION,0*BOX_DIVISION]
+        second = [0*BOX_DIVISION,1*BOX_DIVISION]
+        third = [0*BOX_DIVISION,2*BOX_DIVISION]
+        fourth = [0*BOX_DIVISION,3*BOX_DIVISION]
         shape = [first, second, third, fourth]
         return shape
     
@@ -102,15 +102,15 @@ class Line(Tetromino):
 class T(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0,0]
-        second = [0,1]
-        third = [0,2]
-        fourth = [1,1]
+        first = [0*BOX_DIVISION,0*BOX_DIVISION]
+        second = [0*BOX_DIVISION,1*BOX_DIVISION]
+        third = [0*BOX_DIVISION,2*BOX_DIVISION]
+        fourth = [1*BOX_DIVISION,1*BOX_DIVISION]
         shape = [first, second, third, fourth]
         return shape
     
@@ -119,15 +119,15 @@ class T(Tetromino):
 class L(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0,0]
-        second = [0,1]
-        third = [0,2]
-        fourth = [1,0]
+        first = [0*BOX_DIVISION,0*BOX_DIVISION]
+        second = [0*BOX_DIVISION,1*BOX_DIVISION]
+        third = [0*BOX_DIVISION,2*BOX_DIVISION]
+        fourth = [1*BOX_DIVISION,0*BOX_DIVISION]
         shape = [first, second, third, fourth]
         return shape
     
@@ -136,15 +136,15 @@ class L(Tetromino):
 class J(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0,0]
-        second = [0,1]
-        third = [0,2]
-        fourth = [1,2]
+        first = [0*BOX_DIVISION,0*BOX_DIVISION]
+        second = [0*BOX_DIVISION,1*BOX_DIVISION]
+        third = [0*BOX_DIVISION,2*BOX_DIVISION]
+        fourth = [1*BOX_DIVISION,2*BOX_DIVISION]
         shape = [first, second, third, fourth]
         return shape
     
@@ -153,15 +153,15 @@ class J(Tetromino):
 class S(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0,1]
-        second = [0,2]
-        third = [1,0]
-        fourth = [1,1]
+        first = [0*BOX_DIVISION,1*BOX_DIVISION]
+        second = [0*BOX_DIVISION,2*BOX_DIVISION]
+        third = [1*BOX_DIVISION,0*BOX_DIVISION]
+        fourth = [1*BOX_DIVISION,1*BOX_DIVISION]
         shape = [first, second, third, fourth]
         return shape
     
@@ -170,14 +170,14 @@ class S(Tetromino):
 class Z(Tetromino):
     def __init__(self):
         super().__init__()
-        self.width = RECT_WIDTH
-        self.height = RECT_HEIGHT
+        self.width = BOX_WIDTH
+        self.height = BOX_HEIGHT
         self.coords = self.build_shape()
 
     def build_shape(self) -> list:
-        first = [0,0]
-        second = [0,1]
-        third = [1,1]
-        fourth = [1,2]
+        first = [0*BOX_DIVISION,0*BOX_DIVISION]
+        second = [0*BOX_DIVISION,1*BOX_DIVISION]
+        third = [1*BOX_DIVISION,1*BOX_DIVISION]
+        fourth = [1*BOX_DIVISION,2*BOX_DIVISION]
         shape = [first, second, third, fourth]
         return shape
