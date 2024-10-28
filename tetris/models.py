@@ -9,6 +9,7 @@ class Tetromino:
     def __init__(self):
         self.step = SIDE_STEP
         self.fall_step = FALL_STEP
+        # self.shape = []
         self.coords = []
         self.potential_coords = []
         self.color = (255,255,255)
@@ -34,6 +35,17 @@ class Tetromino:
     def move_down(self):
         for coord in self.coords:
             coord[0] += self.fall_step
+
+    # def pop_coords(self):
+    #     coords = []
+    #     for rect in self.shape:
+    #         coord = []
+    #         for i in range(BOX_DIVISION):
+    #             new_row = rect[0] * i
+    #             new_col = rect[1] * i
+    #             coord.append([new_row,new_col])
+
+
 
 
 # square shaped tetromino
@@ -78,10 +90,29 @@ class Line(Tetromino):
         return shape
     
     def orientation_0(self):
-        pass
+       
+        self.potential_coords = [coord[:] for coord in self.coords]
+        self.potential_coords[0] = [self.potential_coords[0][0]-1*BOX_DIVISION,
+                                    self.potential_coords[0][1]+2*BOX_DIVISION]
+        self.potential_coords[1] = [self.potential_coords[1][0]+1*BOX_DIVISION,
+                                    self.potential_coords[1][1]+1*BOX_DIVISION]
+        self.potential_coords[3] = [self.potential_coords[3][0]+2*BOX_DIVISION,
+                                    self.potential_coords[3][1]-1*BOX_DIVISION]
+        
+        self.orientation = 0
+      
 
     def orientation_1(self):
-        pass
+       
+        self.potential_coords = [coord[:] for coord in self.coords]
+        self.potential_coords[0] = [self.potential_coords[0][0]+1*BOX_DIVISION,
+                                    self.potential_coords[0][1]-2*BOX_DIVISION]
+        self.potential_coords[1] = [self.potential_coords[1][0]-1*BOX_DIVISION,
+                                    self.potential_coords[1][1]-1*BOX_DIVISION]
+        self.potential_coords[3] = [self.potential_coords[3][0]-2*BOX_DIVISION,
+                                    self.potential_coords[3][1]+1*BOX_DIVISION]
+        self.orientation = 1
+  
 
     def turn_right(self) -> list:
         if self.orientation == 0:

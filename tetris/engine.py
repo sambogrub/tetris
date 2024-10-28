@@ -29,6 +29,7 @@ class Engine():
 
     #check for collision when moving the piece
     def check_movement_collision(self,piece):
+        print('checking coords')
         for coord in piece.potential_coords:
             grid_row = int(coord[0])
             grid_col = int(coord[1])
@@ -57,7 +58,7 @@ class Engine():
     def run(self):
         run = True
         # piece = self.get_new_piece()
-        piece = self.get_new_piece()
+        piece = models.Line()#self.get_new_piece()
    
         moving_piece = True #indicates that a piece is falling. 
         num_frames = 0 #initialize the number of frames, used in falling speed
@@ -125,6 +126,10 @@ class Engine():
             case pygame.K_s: #increased fall movement of piece
                 pass
             case pygame.K_RIGHT: #right turn of piece
-                pass
+                piece.turn_right()
+                if self.check_movement_collision(piece) is False:
+                    piece.commit_coordinates()
             case pygame.K_LEFT: #left turn of piece
-                pass
+                piece.turn_left()
+                if self.check_movement_collision(piece) is False:
+                    piece.commit_coordinates()
