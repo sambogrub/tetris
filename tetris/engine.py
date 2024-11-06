@@ -108,6 +108,15 @@ class Engine():
                 if self.try_rotate_piece(-1, piece):
                     piece.turn_count_clock()
 
+    def is_game_over(self, piece):
+        start_coords = piece.get_grid_coordinates(piece.shape)
+        for coord in start_coords:
+            row, col = coord[1], coord[0]
+            if row >= 0 and self.screen_grid[row][col][0] == 1:
+                return True
+        return False
+
+
     def game_loop(self):
         # main game loop
         running = True
@@ -125,8 +134,13 @@ class Engine():
             self.clock.tick(config.FPS)
 
             # check if a new piece is needed using moving_piece
-            if moving_piece == False:
+            if not moving_piece:
                 piece = self.get_new_piece()
+                frame_count = 0
+                if self.is_game_over(piece):
+                    print('game over')
+                    running = False
+                    break
                 moving_piece = True
 
             #gets the keypress and passes it to the actions function

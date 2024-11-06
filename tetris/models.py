@@ -10,7 +10,7 @@ class Tetromino:
         self.coordinates = []
         self.color = (255,0,0)
         self.orientation = 0
-        self.x_offset = 0
+        self.x_offset = 3
         self.y_offset = 0
 
     def get_grid_coordinates(self, shape_) -> list:
