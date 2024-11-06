@@ -1,10 +1,10 @@
 import pygame
 from pygame.locals import *
-from config import SCREEN_HEIGHT, SCREEN_WIDTH, SIDE_STEP,BOX_WIDTH,BOX_HEIGHT,BOX_DIVISION
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, BOX_WIDTH, BOX_HEIGHT
 
 class UI():
     def __init__(self):
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # update screen functions
     def update_screen(self, matrix, piece):
@@ -22,13 +22,13 @@ class UI():
         for row_num,row in enumerate(matrix):
             for col_num,cell in enumerate(row):
                 if cell[0] is not None:
-                    rectangle = pygame.Rect(col_num*BOX_WIDTH,row_num*BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT)
+                    rectangle = pygame.Rect(col_num * BOX_WIDTH, row_num * BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT)
                     pygame.draw.rect(self.screen, cell[1], rectangle)
                    
 
     # draw moving piece
     def draw_current_piece(self,piece):
         
-        for coord in piece.coords:
-            rect = pygame.Rect(coord[1]*BOX_WIDTH/BOX_DIVISION, coord[0]* BOX_HEIGHT/BOX_DIVISION, BOX_WIDTH, BOX_HEIGHT)
+        for coord in piece.get_grid_coordinates(piece.shape):
+            rect = pygame.Rect(coord[0]*BOX_WIDTH, coord[1]*BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT)
             pygame.draw.rect(self.screen, piece.color ,rect)

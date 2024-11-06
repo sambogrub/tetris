@@ -12,7 +12,7 @@ def main():
     engine = Engine(ui)
 
     #start the game
-    engine.run()
+    engine.game_loop()
 
     # quit when the run loop ends
     pygame.quit()
